@@ -1,0 +1,14 @@
+node_modules/
+dist/
+
+.env
+.env.*
+!.env.example
+
+lighthouse-*.report.html
+lighthouse-*.report.json
+
+*.log
+.DS_Store
+Thumbs.db
+.vercel/
