@@ -10,6 +10,16 @@ Copyright 2024 Henry Heffernan
 
 Licensed under the MIT License. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to inclusion of the copyright and permission notice.
 
+## Keyboard audio
+
+`public/audio/keyboard/key_1.mp3` through `public/audio/keyboard/key_6.mp3` are sourced from Henry Heffernan's portfolio repository:
+
+https://github.com/henryjeff/portfolio-website
+
+Copyright 2024 Henry Heffernan
+
+Licensed under the MIT License. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to inclusion of the copyright and permission notice.
+
 ## Vintage interface icons
 
 The PNG files in `public/icons/` are sourced from Alex H.'s Vintage Icons repository:
