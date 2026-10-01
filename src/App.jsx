@@ -10,7 +10,7 @@ import Projects from './views/Projects'
 import ProjectDetails from './views/ProjectDetails'
 import Skills from './views/Skills'
 import Contact from './views/Contact'
-import { getUiSoundEnabled, playKeyboardSound, playUiSound, setUiSoundEnabled } from './audio'
+import { getUiSoundEnabled, playKeyboardSound, playUiSound, primeUiAudio, setUiSoundEnabled } from './audio'
 import BootScreen from './components/BootScreen'
 import Minesweeper from './components/Minesweeper'
 import WordGame from './components/WordGame'
@@ -94,6 +94,15 @@ export default function App() {
     const nextValue = !soundEnabled
     setSoundEnabled(nextValue)
     setUiSoundEnabled(nextValue)
+  }
+
+  const restoreAfterFailedShutdown = () => {
+    setShutdownPhase(null)
+    setStatus('Shutdown cancelled: socket initialization failed')
+    window.requestAnimationFrame(() => {
+      primeUiAudio()
+      playUiSound('open')
+    })
   }
 
   useEffect(() => {
@@ -241,7 +250,7 @@ export default function App() {
           <section className="shutdown-error" role="alertdialog" aria-modal="true" aria-labelledby="shutdown-error-title">
             <header id="shutdown-error-title">RANIER.OS - System Error</header>
             <div><span aria-hidden="true">×</span><p><strong>Socket initialization failed.</strong><br />The network service did not respond.<br /><br />Shutdown has been cancelled.</p></div>
-            <footer><button type="button" className="retro-button" autoFocus onClick={() => { setShutdownPhase(null); setStatus('Shutdown cancelled: socket initialization failed') }}>Return to Desktop</button></footer>
+            <footer><button type="button" className="retro-button" autoFocus onClick={restoreAfterFailedShutdown}>Return to Desktop</button></footer>
           </section>
         )}
       </section>}
