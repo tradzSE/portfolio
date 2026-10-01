@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-OYhNN+ydaRR5dZw9sXDHN50H8/94APXfUc6gpBYJL/s='; style-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-Rwtqd99xPTCSsTozldidQZdz3I1pCXErIkmWAenAA7Y='; style-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
@@ -22,7 +22,7 @@
 /resume.pdf
   Cache-Control: public, max-age=86400
 
-/social-preview.jpg
+/og-preview.png
   Cache-Control: public, max-age=86400
 
 /sitemap.xml

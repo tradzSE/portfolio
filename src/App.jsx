@@ -10,7 +10,7 @@ import Projects from './views/Projects'
 import ProjectDetails from './views/ProjectDetails'
 import Skills from './views/Skills'
 import Contact from './views/Contact'
-import { getUiSoundEnabled, playUiSound, setUiSoundEnabled } from './audio'
+import { getUiSoundEnabled, playKeyboardSound, playUiSound, setUiSoundEnabled } from './audio'
 import BootScreen from './components/BootScreen'
 import Minesweeper from './components/Minesweeper'
 import WordGame from './components/WordGame'
@@ -109,11 +109,14 @@ export default function App() {
   useEffect(() => {
     const playMouseDown = () => playUiSound('mouse-down')
     const playMouseUp = () => playUiSound('mouse-up')
+    const playKeyDown = (event) => { if (!event.repeat) playKeyboardSound() }
     window.addEventListener('pointerdown', playMouseDown, true)
     window.addEventListener('pointerup', playMouseUp, true)
+    window.addEventListener('keydown', playKeyDown, true)
     return () => {
       window.removeEventListener('pointerdown', playMouseDown, true)
       window.removeEventListener('pointerup', playMouseUp, true)
+      window.removeEventListener('keydown', playKeyDown, true)
     }
   }, [])
 

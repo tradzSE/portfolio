@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-import { playKeyboardSound } from '../audio'
 
 const ANSWERS = ['APPLE', 'BEACH', 'BRAIN', 'CHAIR', 'CLOUD', 'DREAM', 'FLAME', 'FRAME', 'GRAPE', 'HOUSE', 'LIGHT', 'MOUSE', 'PLANT', 'ROBOT', 'SHARE', 'SMILE', 'SPACE', 'TRAIN', 'WATER', 'WORLD']
 const KEY_ROWS = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM']
@@ -49,7 +48,6 @@ export default function WordGame({ active = true }) {
 
   const handleKey = useCallback((key) => {
     if (gameState !== 'playing') return
-    playKeyboardSound()
     if (key === 'ENTER') {
       if (currentGuess.length !== 5) {
         setMessage('Not enough letters.')
