@@ -14,6 +14,7 @@ import { getUiSoundEnabled, playKeyboardSound, playUiSound, setUiSoundEnabled } 
 import BootScreen from './components/BootScreen'
 import Minesweeper from './components/Minesweeper'
 import WordGame from './components/WordGame'
+import CurrentProjectNotepad from './components/CurrentProjectNotepad'
 import DontClickEasterEgg from './components/easter-eggs/DontClickEasterEgg'
 
 const desktopItems = [
@@ -21,6 +22,7 @@ const desktopItems = [
   ['Recycle Bin', 'bin', 'recycle'],
   ['Minesweeper', 'game', 'minesweeper'],
   ['Word.exe', 'word', 'word-game'],
+  ['CURRENT_PROJECT.TXT', 'text', 'current-project'],
   ["DON'T_CLICK.exe", 'danger', 'dont-click'],
 ]
 
@@ -45,6 +47,9 @@ export default function App() {
   const [wordGameOpen, setWordGameOpen] = useState(false)
   const [wordGameMinimized, setWordGameMinimized] = useState(false)
   const [wordGameMaximized, setWordGameMaximized] = useState(false)
+  const [notepadOpen, setNotepadOpen] = useState(false)
+  const [notepadMinimized, setNotepadMinimized] = useState(false)
+  const [notepadMaximized, setNotepadMaximized] = useState(false)
   const [easterEggOpen, setEasterEggOpen] = useState(false)
   const [easterEggCompleted, setEasterEggCompleted] = useState(() => sessionStorage.getItem('ranier-os-curiosity-achievement') === 'unlocked')
   const drag = useRef(null)
@@ -65,6 +70,12 @@ export default function App() {
     if (target === 'word-game') {
       setWordGameOpen(true)
       setWordGameMinimized(false)
+      return
+    }
+    if (target === 'current-project') {
+      setNotepadOpen(true)
+      setNotepadMinimized(false)
+      setStatus('CURRENT_PROJECT.TXT - Notepad')
       return
     }
     if (target === 'dont-click') {
@@ -131,7 +142,7 @@ export default function App() {
       <div className="desktop-icons">
         {desktopItems.map(([label, type, target]) => {
           const displayLabel = target === 'dont-click' && easterEggCompleted ? 'YOU_CLICKED.exe' : label
-          return <DesktopIcon key={target} label={displayLabel} type={type} selected={selectedIcon === displayLabel} onSelect={() => setSelectedIcon(displayLabel)} onOpen={() => navigate(target)} openOnTouch={target === 'dont-click'} />
+          return <DesktopIcon key={target} label={displayLabel} type={type} selected={selectedIcon === displayLabel} onSelect={() => setSelectedIcon(displayLabel)} onOpen={() => navigate(target)} openOnTouch={target === 'dont-click' || target === 'current-project'} onMouseEnter={target === 'current-project' ? () => setStatus('See what Ranier is currently building') : undefined} onMouseLeave={target === 'current-project' ? () => setStatus(notepadOpen && !notepadMinimized ? 'CURRENT_PROJECT.TXT - Notepad' : 'Ready') : undefined} />
         })}
       </div>
 
@@ -178,6 +189,9 @@ export default function App() {
         wordGameOpen={wordGameOpen}
         wordGameMinimized={wordGameMinimized}
         onWordGameClick={() => setWordGameMinimized((value) => !value)}
+        notepadOpen={notepadOpen}
+        notepadMinimized={notepadMinimized}
+        onNotepadClick={() => { setNotepadMinimized((value) => !value); setStatus('CURRENT_PROJECT.TXT - Notepad') }}
         soundEnabled={soundEnabled}
         onSoundToggle={toggleSound}
       />
@@ -238,6 +252,21 @@ export default function App() {
           onClose={() => { setWordGameOpen(false); setWordGameMaximized(false) }}
         >
           <WordGame active={!wordGameMinimized && !easterEggOpen} />
+        </Dialog>
+      )}
+      {notepadOpen && (
+        <Dialog
+          title="CURRENT_PROJECT.TXT - Notepad"
+          className="notepad-dialog"
+          showActions={false}
+          hidden={notepadMinimized}
+          maximized={notepadMaximized}
+          draggable
+          onMinimize={() => { setNotepadMinimized(true); setStatus('Ready') }}
+          onMaximize={() => setNotepadMaximized((value) => !value)}
+          onClose={() => { setNotepadOpen(false); setNotepadMaximized(false); setStatus('Ready') }}
+        >
+          <CurrentProjectNotepad onExit={() => { setNotepadOpen(false); setNotepadMaximized(false); setStatus('Ready') }} />
         </Dialog>
       )}
       {easterEggOpen && (

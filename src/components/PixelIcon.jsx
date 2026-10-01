@@ -3,6 +3,7 @@ const icons = {
   bin: '/icons/recycle-bin.png',
   game: '/icons/minesweeper.png',
   word: '/icons/word.ico',
+  text: '/icons/text-document.png',
   danger: '/icons/application.png',
 }
 

@@ -57,9 +57,9 @@ button:focus-visible, a:focus-visible { outline: 2px dotted #fff; outline-offset
 .desktop-brand { position: absolute; right: 32px; top: 28px; color: rgb(255 255 255 / .22); text-align: right; letter-spacing: .08em; }
 .desktop-brand strong { display: block; font-size: 31px; line-height: 1; }
 .desktop-brand span { font-size: 10px; }
-.desktop-icons { position: absolute; z-index: 1; top: 18px; left: 14px; display: grid; grid-auto-flow: column; grid-template-rows: repeat(5, 82px); gap: 4px 14px; }
-.desktop-icon { border: 0; background: transparent; color: #fff; width: 78px; min-height: 78px; padding: 4px 2px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 5px; cursor: default; text-shadow: 1px 1px #111; }
-.desktop-icon > span:last-child { font-size: 11px; line-height: 1.15; padding: 2px 3px; }
+.desktop-icons { position: absolute; z-index: 1; top: 18px; left: 8px; display: grid; grid-auto-flow: column; grid-template-rows: repeat(6, 82px); gap: 4px 14px; }
+.desktop-icon { border: 0; background: transparent; color: #fff; width: 116px; min-height: 78px; padding: 4px 2px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 5px; cursor: default; text-shadow: 1px 1px #111; }
+.desktop-icon > span:last-child { max-width: 112px; font-size: 11px; line-height: 1.15; padding: 2px 3px; overflow-wrap: anywhere; }
 .desktop-icon.selected > span:last-child { background: var(--blue-2); outline: 1px dotted #fff; }
 
 .pixel-icon { width: 42px; height: 38px; display: inline-grid; place-items: center; position: relative; flex: 0 0 auto; image-rendering: pixelated; }
@@ -431,6 +431,33 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
 .word-keyboard button.wide { min-width: 55px; font-size: 10px; }
 .word-game-status { min-height: 23px; display: flex; justify-content: space-between; gap: 12px; padding: 5px 8px; border-top: 1px solid #fff; color: #555; background: #ece9d8; font: 9px Tahoma, sans-serif; }
 
+.notepad-dialog { width: min(650px, calc(100vw - 24px)); height: min(500px, calc(100dvh - 64px)); display: grid; grid-template-rows: auto 1fr; }
+.notepad-dialog .dialog-content { min-height: 0; padding: 0; overflow: hidden; }
+.notepad-app { position: relative; height: 100%; min-height: 0; display: grid; grid-template-rows: 27px 1fr 22px; color: #111; background: #ece9d8; font-family: Tahoma, sans-serif; }
+.notepad-menu { position: relative; z-index: 2; display: flex; align-items: stretch; padding: 1px 3px; border-bottom: 1px solid #aca899; background: #ece9d8; }
+.notepad-menu > button, .notepad-menu-group > button { height: 24px; padding: 2px 7px; border: 0; color: #111; background: transparent; font: 11px Tahoma, sans-serif; }
+.notepad-menu > button:hover, .notepad-menu-group > button:hover, .notepad-menu-group > button:focus { color: #fff; background: #316ac5; outline: 0; }
+.notepad-menu-group { position: relative; }
+.notepad-dropdown { position: absolute; top: 24px; left: 0; width: 190px; padding: 2px; border: 1px solid #777; background: #fff; box-shadow: 2px 2px 3px rgb(0 0 0 / .35); }
+.notepad-dropdown button { width: 100%; min-height: 24px; display: flex; align-items: center; justify-content: space-between; padding: 3px 8px; border: 0; color: #111; background: #fff; font: 11px Tahoma, sans-serif; text-align: left; }
+.notepad-dropdown button:hover, .notepad-dropdown button:focus { color: #fff; background: #316ac5; outline: 0; }
+.notepad-dropdown hr { height: 1px; margin: 3px 2px; border: 0; background: #aca899; }
+.notepad-dropdown .menu-check { width: 14px; text-align: center; }
+.notepad-document { width: 100%; height: 100%; min-height: 0; resize: none; overflow: auto; padding: 6px 7px; border: 1px solid #7f9db9; border-width: 1px 0; border-radius: 0; color: #111; background: #fff; font: 13px/1.4 "Lucida Console", "Courier New", monospace; outline: 0; tab-size: 4; }
+.notepad-status { display: flex; align-items: center; justify-content: flex-end; padding: 2px 12px; border-top: 1px solid #fff; color: #333; background: #ece9d8; font: 10px Tahoma, sans-serif; }
+.notepad-dialog.dialog-maximized .dialog-content, .notepad-dialog.dialog-maximized .notepad-app { height: 100%; }
+.notepad-help-layer { position: absolute; z-index: 4; inset: 31px 0 0; display: grid; place-items: center; padding: 12px; background: rgb(0 0 0 / .12); }
+.notepad-help { width: min(390px, 100%); border: 1px solid #003c9d; border-radius: 6px 6px 2px 2px; background: #ece9d8; box-shadow: 0 0 0 2px #2f74d0, 4px 6px 14px rgb(0 0 0 / .4); }
+.notepad-help > header { min-height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 3px 4px 3px 8px; border-radius: 4px 4px 0 0; color: #fff; background: linear-gradient(180deg, #3d95ff, #0755c6 70%, #0846aa); font-size: 11px; text-shadow: 1px 1px #003b8f; }
+.notepad-help > header button { width: 23px; height: 21px; padding: 0; border: 1px solid #fff; border-radius: 3px; color: #fff; background: linear-gradient(135deg, #ef937c, #df4c34 48%, #a51d12); box-shadow: inset 1px 1px rgb(255 255 255 / .7), 0 0 0 1px #8e2118; font: 700 15px Arial, sans-serif; }
+.notepad-help > div { display: grid; grid-template-columns: 42px 1fr; gap: 13px; padding: 22px 20px 14px; }
+.notepad-help img { width: 36px; height: 36px; image-rendering: pixelated; }
+.notepad-help p { margin: 0; font-size: 11px; line-height: 1.45; }
+.notepad-help p strong, .notepad-help p span { display: block; }
+.notepad-help p span { margin-top: 6px; }
+.notepad-help > footer { display: flex; justify-content: flex-end; padding: 0 16px 14px; }
+.notepad-help > footer button { min-width: 76px; padding: 4px 13px; border: 2px solid; border-color: #fff #333 #333 #fff; background: #ece9d8; font: 11px Tahoma, sans-serif; }
+
 .dont-click-confirmation .dialog-content { padding: 20px 22px 12px; }
 .dont-click-warning { display: grid; grid-template-columns: 40px 1fr; align-items: center; gap: 13px; }
 .dont-click-warning > span { width: 36px; height: 36px; display: grid; place-items: center; border: 2px solid #8c6900; color: #181000; background: #ffd83d; clip-path: polygon(50% 0, 100% 100%, 0 100%); font: 900 22px/43px Arial, sans-serif; }
@@ -544,6 +571,9 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
   .explorer-heading { align-items: center; }.explorer-heading h1, .skills-view h1 { font-size: 24px; }.file-table { min-width: 0; overflow: hidden; }.file-row { grid-template-columns: 1.7fr .7fr .6fr; font-size: 9px; padding: 8px 5px; }.file-row span:nth-child(2) { display: none; }
   .case-header { display: block; }.case-header .retro-button { margin-top: 17px; }.project-meta { grid-template-columns: 1fr; }.project-meta div { border-right: 0; border-bottom: 1px solid #aaa; padding: 10px; }.case-columns, .screenshot-grid { grid-template-columns: 1fr; }.case-columns > div { padding: 17px 0; }.screenshot-grid > div { aspect-ratio: 2/1; }
   .contact-content { padding: 19px; }.contact-question { font-size: 20px; }.task-button { min-width: 0; max-width: 52vw; overflow: hidden; white-space: nowrap; }.taskbar time { min-width: 68px; padding-inline: 3px; }
+  .notepad-dialog, .notepad-dialog.dialog-maximized { position: fixed; inset: 56px 4px 44px; width: auto !important; max-width: none; height: auto; transform: none !important; border-radius: 4px 4px 2px 2px; }
+  .notepad-document { padding: 8px; font-size: 12px; }
+  .notepad-dropdown { width: 170px; }
   .statusbar span:last-child { display: none; }.statusbar { grid-template-columns: 1fr; }
 }
 

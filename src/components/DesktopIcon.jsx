@@ -1,7 +1,7 @@
 import PixelIcon from './PixelIcon'
 import { playUiSound } from '../audio'
 
-export default function DesktopIcon({ label, type, selected, onSelect, onOpen, openOnTouch = false }) {
+export default function DesktopIcon({ label, type, selected, onSelect, onOpen, openOnTouch = false, onMouseEnter, onMouseLeave }) {
   return (
     <button
       className={`desktop-icon desktop-icon-${type} ${selected ? 'selected' : ''}`}
@@ -10,6 +10,8 @@ export default function DesktopIcon({ label, type, selected, onSelect, onOpen, o
       onDoubleClick={() => { playUiSound('open'); onOpen() }}
       onPointerUp={(event) => { if (openOnTouch && event.pointerType !== 'mouse') { playUiSound('open'); onOpen() } }}
       onKeyDown={(event) => { if (event.key === 'Enter') { playUiSound('open'); onOpen() } }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       aria-label={`Open ${label}`}
     >
       <PixelIcon type={type} />
