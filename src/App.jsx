@@ -23,7 +23,7 @@ const desktopItems = [
   ['Minesweeper', 'game', 'minesweeper'],
   ['Word.exe', 'word', 'word-game'],
   ['CURRENT_PROJECT.TXT', 'text', 'current-project'],
-  ["DON'T_CLICK.exe", 'danger', 'dont-click'],
+  ['LOVE-LETTER-FOR-YOU.TXT.vbs', 'danger', 'dont-click'],
 ]
 
 const views = { home: Home, about: About, projects: Projects, project: ProjectDetails, skills: Skills, contact: Contact }
@@ -142,8 +142,8 @@ export default function App() {
       <div className="desktop-brand" aria-hidden="true"><strong>RANIER.OS</strong><span>PORTFOLIO EDITION 2026</span></div>
       <div className="desktop-icons">
         {desktopItems.map(([label, type, target]) => {
-          const displayLabel = target === 'dont-click' && easterEggCompleted ? 'YOU_CLICKED.exe' : label
-          return <DesktopIcon key={target} label={displayLabel} type={type} selected={selectedIcon === displayLabel} onSelect={() => setSelectedIcon(displayLabel)} onOpen={() => navigate(target)} openOnTouch={target === 'dont-click' || target === 'current-project'} onMouseEnter={target === 'current-project' ? () => setStatus('See what Ranier is currently building') : undefined} onMouseLeave={target === 'current-project' ? () => setStatus(notepadOpen && !notepadMinimized ? 'CURRENT_PROJECT.TXT - Notepad' : 'Ready') : undefined} />
+          const displayLabel = label
+          return <DesktopIcon key={target} label={displayLabel} type={type} selected={selectedIcon === displayLabel} onSelect={() => setSelectedIcon(displayLabel)} onOpen={() => navigate(target)} openOnTouch onMouseEnter={target === 'current-project' ? () => setStatus('See what Ranier is currently building') : undefined} onMouseLeave={target === 'current-project' ? () => setStatus(notepadOpen && !notepadMinimized ? 'CURRENT_PROJECT.TXT - Notepad' : 'Ready') : undefined} />
         })}
       </div>
 

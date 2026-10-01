@@ -35,9 +35,9 @@ export default function FakeHackSequence({ onEscape, onComplete }) {
 
   useEffect(() => {
     if (phase !== 'console') return undefined
-    const lineTimer = window.setInterval(() => setVisibleLines((count) => Math.min(count + 1, consoleLines.length)), 330)
-    const escapeTimer = window.setTimeout(() => setShowEscape(true), 2000)
-    const revealTimer = window.setTimeout(() => setPhase('wait'), 3700)
+    const lineTimer = window.setInterval(() => setVisibleLines((count) => Math.min(count + 1, consoleLines.length)), 1600)
+    const escapeTimer = window.setTimeout(() => setShowEscape(true), 2500)
+    const revealTimer = window.setTimeout(() => setPhase('wait'), 20000)
     return () => {
       window.clearInterval(lineTimer)
       window.clearTimeout(escapeTimer)
