@@ -2,9 +2,15 @@ import { useState } from 'react'
 import RetroButton from '../components/RetroButton'
 import { projects } from '../data'
 
-export default function Projects({ navigate }) {
-  const [selected, setSelected] = useState(projects[0]?.id ?? null)
+export default function Projects({ navigate, selectedProjectId, onProjectSelect }) {
+  const [selected, setSelected] = useState(selectedProjectId ?? projects[0]?.id ?? null)
   const selectedProject = projects.find((project) => project.id === selected)
+
+  const openProject = (projectId = selected) => {
+    if (!projectId) return
+    onProjectSelect(projectId)
+    navigate('project')
+  }
 
   return (
     <div className="view projects-view">
@@ -12,7 +18,7 @@ export default function Projects({ navigate }) {
         <button type="button" disabled>← Back</button>
         <button type="button" disabled>↑ Up</button>
         <span />
-        <button type="button" disabled={!selectedProject} onClick={() => navigate('project')}>Open</button>
+        <button type="button" disabled={!selectedProject} onClick={() => openProject()}>Open</button>
       </nav>
 
       <div className="projects-address">
@@ -36,7 +42,7 @@ export default function Projects({ navigate }) {
                 <div><dt>Year</dt><dd>{selectedProject.year}</dd></div>
                 <div><dt>Status</dt><dd>{selectedProject.status}</dd></div>
               </dl>
-              <RetroButton type="button" onClick={() => navigate('project')}>Open project</RetroButton>
+              <RetroButton type="button" onClick={() => openProject()}>Open project</RetroButton>
             </section>
           )}
         </aside>
@@ -52,7 +58,7 @@ export default function Projects({ navigate }) {
               role="row"
               key={project.id}
               onClick={() => setSelected(project.id)}
-              onDoubleClick={() => navigate('project')}
+              onDoubleClick={() => openProject(project.id)}
             >
               <span role="cell"><img src="/icons/application.png" alt="" />{project.name}</span>
               <span role="cell">{project.type}</span>

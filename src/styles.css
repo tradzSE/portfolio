@@ -458,6 +458,17 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
 .notepad-help > footer { display: flex; justify-content: flex-end; padding: 0 16px 14px; }
 .notepad-help > footer button { min-width: 76px; padding: 4px 13px; border: 2px solid; border-color: #fff #333 #333 #fff; background: #ece9d8; font: 11px Tahoma, sans-serif; }
 
+.welcome-dialog { width: min(540px, calc(100vw - 28px)); }
+.welcome-dialog .dialog-content { padding: 8px; background: #ece9d8; }
+.welcome-dialog .dialog-actions { justify-content: flex-end; padding: 8px 12px 12px; }
+.welcome-document { max-height: min(540px, calc(100dvh - 170px)); overflow: auto; padding: 22px 25px; border: 1px solid #7f9db9; color: #111; background: #fff; font: 12px/1.55 "Lucida Console", "Courier New", monospace; }
+.welcome-document h2, .welcome-document p { margin: 0 0 13px; font: inherit; }
+.welcome-document h2 { margin-bottom: 0; font-weight: 700; }
+.welcome-document .welcome-rule { margin-bottom: 20px; }
+.welcome-document ul { margin: 4px 0 18px; padding: 0; list-style: none; }
+.welcome-document li { margin: 5px 0; }
+.welcome-document li::before { content: "• "; }
+
 .dont-click-confirmation .dialog-content { padding: 20px 22px 12px; }
 .dont-click-warning { display: grid; grid-template-columns: 40px 1fr; align-items: center; gap: 13px; }
 .dont-click-warning > span { width: 36px; height: 36px; display: grid; place-items: center; border: 2px solid #8c6900; color: #181000; background: #ffd83d; clip-path: polygon(50% 0, 100% 100%, 0 100%); font: 900 22px/43px Arial, sans-serif; }

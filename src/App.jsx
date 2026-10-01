@@ -31,7 +31,8 @@ const views = { home: Home, about: About, projects: Projects, project: ProjectDe
 export default function App() {
   const [booted, setBooted] = useState(() => localStorage.getItem('ranier-os-boot-complete-v1') === 'true')
   const [section, setSection] = useState('home')
-  const [windowOpen, setWindowOpen] = useState(true)
+  const [selectedProjectId, setSelectedProjectId] = useState('draftix')
+  const [windowOpen, setWindowOpen] = useState(() => localStorage.getItem('ranier-os-welcome-letter-shown-v1') === 'true')
   const [minimized, setMinimized] = useState(false)
   const [maximized, setMaximized] = useState(false)
   const [startOpen, setStartOpen] = useState(false)
@@ -40,7 +41,7 @@ export default function App() {
   const [status, setStatus] = useState('Ready')
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [soundEnabled, setSoundEnabled] = useState(getUiSoundEnabled)
-  const [notificationVisible, setNotificationVisible] = useState(false)
+  const [welcomeOpen, setWelcomeOpen] = useState(false)
   const [minesweeperOpen, setMinesweeperOpen] = useState(false)
   const [minesweeperMinimized, setMinesweeperMinimized] = useState(false)
   const [minesweeperMaximized, setMinesweeperMaximized] = useState(false)
@@ -109,11 +110,11 @@ export default function App() {
   }, [maximized])
 
   useEffect(() => {
-    if (!booted || localStorage.getItem('ranier-os-welcome-shown-v1')) return
+    if (!booted || localStorage.getItem('ranier-os-welcome-letter-shown-v1')) return
     const timer = setTimeout(() => {
-      setNotificationVisible(true)
-      localStorage.setItem('ranier-os-welcome-shown-v1', 'true')
-    }, 2600)
+      setWelcomeOpen(true)
+      localStorage.setItem('ranier-os-welcome-letter-shown-v1', 'true')
+    }, 500)
     return () => clearTimeout(timer)
   }, [booted])
 
@@ -170,7 +171,7 @@ export default function App() {
               </nav>
               <div className="sidebar-links"><a href="https://github.com/tradzSE" target="_blank" rel="noreferrer" onMouseEnter={() => setStatus('Opening github.com/tradzSE...')}>GITHUB ↗</a><button onClick={() => navigate('resume')}>RESUME.PDF</button></div>
             </aside>
-            <div className="content-area"><View navigate={navigate} setStatus={setStatus} /></div>
+            <div className="content-area"><View navigate={navigate} setStatus={setStatus} selectedProjectId={selectedProjectId} onProjectSelect={setSelectedProjectId} /></div>
           </div>
           <footer className="statusbar"><span>{status}</span><span>RANIER.OS / ONLINE</span></footer>
         </section>
@@ -196,13 +197,25 @@ export default function App() {
         onSoundToggle={toggleSound}
       />
 
-      {notificationVisible && (
-        <aside className="xp-notification" role="status" aria-live="polite">
-          <button type="button" aria-label="Dismiss notification" onClick={() => setNotificationVisible(false)}>×</button>
-          <strong>Welcome to RANIER.OS</strong>
-          <p>Portfolio loaded successfully.<br />Double-click an icon to explore.</p>
-        </aside>
-      )}
+      {welcomeOpen && <Dialog title="WELCOME TO RANIER.OS" className="welcome-dialog" actionLabel="START EXPLORING" onClose={() => setWelcomeOpen(false)}>
+        <div className="welcome-document">
+          <h2>WELCOME TO RANIER.OS</h2>
+          <p className="welcome-rule">====================</p>
+          <p>Hi, I'm Ranier.</p>
+          <p>This desktop is my portfolio.</p>
+          <p>You can explore it like an old computer:</p>
+          <ul>
+            <li>Open Projects to see what I've built.</li>
+            <li>Open CURRENT_PROJECT.TXT to see what I'm working on.</li>
+            <li>Open My Portfolio to explore my skills.</li>
+            <li>Open Resume.pdf for my resume.</li>
+            <li>Use the Start menu to discover other programs.</li>
+          </ul>
+          <p>Some things may be hidden.</p>
+          <p>Have fun exploring.</p>
+          <p>- Ranier</p>
+        </div>
+      </Dialog>}
 
       {dialog === 'shutdown' && <Dialog title="Shut Down RANIER.OS" actionLabel="Return to Desktop" onClose={() => setDialog(null)}><p className="dialog-lead">It is now safe to close this tab.</p></Dialog>}
       {dialog === 'about-os' && <Dialog title="About RANIER.OS" onClose={() => setDialog(null)}>
