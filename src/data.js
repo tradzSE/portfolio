@@ -16,8 +16,10 @@ export const projects = [
 
 export const skillGroups = [
   ['FRONTEND', ['React', 'Vite', 'HTML', 'CSS']],
-  ['BACKEND', ['Node.js', 'PHP', 'Python']],
+  ['BACKEND', ['Node.js', 'Python']],
   ['DATABASE_AND_SERVICES', ['PostgreSQL', 'Supabase', 'Firebase']],
-  ['LANGUAGES', ['Java']],
+  ['LANGUAGES', ['Java', 'PHP']],
+  ['AI_AGENTS', ['Claude Code', 'Codex', 'Gemini', 'Nano Banana', 'Tripo3D', 'Cline', 'n8n']],
+  ['DESIGN', ['Figma', 'Adobe Photoshop']],
   ['DEPLOYMENT', ['Vercel', 'Netlify', 'Render', 'Railway']],
 ]
