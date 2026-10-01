@@ -19,7 +19,9 @@ html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
 body { overflow: hidden; }
 button, a { font: inherit; }
 button { color: inherit; }
-button:focus-visible, a:focus-visible { outline: 2px dotted #fff; outline-offset: 2px; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px dotted #111; outline-offset: 2px; }
+.desktop-icon:focus-visible, .taskbar button:focus-visible, .titlebar button:focus-visible, .dialog-titlebar button:focus-visible { outline-color: #fff; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 .boot-screen { min-height: 100dvh; background: #020202; color: #f4f4f4; font: 700 clamp(12px, 1.2vw, 17px)/1.32 "Courier New", monospace; letter-spacing: .025em; }
 .bios-screen { min-height: 100dvh; padding: clamp(28px, 5vw, 62px); display: grid; grid-template-rows: auto 1fr auto; }
@@ -165,7 +167,7 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
 .start-options .shutdown-option > span { display: flex; align-items: center; gap: 9px; }
 .start-options .shutdown-option img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
 
-.dialog-layer { position: fixed; z-index: 20; inset: 0; background: rgb(0 0 0 / .22); display: grid; place-items: center; padding: 20px; }.dialog { width: min(430px, 100%); background: var(--window); border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: 5px 6px rgb(0 0 0 / .5); padding: 3px; }.dialog-titlebar { display: flex; align-items: center; justify-content: space-between; background: var(--blue); color: #fff; padding: 3px 4px 3px 8px; font: 700 12px Arial, sans-serif; }.dialog-content { min-height: 100px; padding: 24px 28px; font-size: 13px; line-height: 1.65; user-select: text; }.dialog-lead { font-weight: 700; font-size: 15px; }.dialog-actions { display: flex; justify-content: center; padding: 0 10px 15px; }.bin-list { background: #fff; border: 2px inset #ddd; padding: 6px; }
+.dialog-layer { position: fixed; z-index: 20; inset: 0; background: rgb(0 0 0 / .22); display: grid; place-items: center; padding: 20px; overscroll-behavior: contain; }.dialog { width: min(430px, 100%); background: var(--window); border: 2px solid; border-color: #fff #222 #222 #fff; box-shadow: 5px 6px rgb(0 0 0 / .5); padding: 3px; }.dialog-titlebar { display: flex; align-items: center; justify-content: space-between; background: var(--blue); color: #fff; padding: 3px 4px 3px 8px; font: 700 12px Arial, sans-serif; }.dialog-content { min-height: 100px; padding: 24px 28px; font-size: 13px; line-height: 1.65; user-select: text; }.dialog-lead { font-weight: 700; font-size: 15px; }.dialog-actions { display: flex; justify-content: center; padding: 0 10px 15px; }.bin-list { background: #fff; border: 2px inset #ddd; padding: 6px; }
 .bin-list button { width: 100%; display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid transparent; background: #fff; color: #111; text-align: left; font: 11px Tahoma, sans-serif; }
 .bin-list button:hover, .bin-list button:focus { border-color: #7f9db9; background: #e7f0ff; outline: none; }
 .bin-list button:focus { color: #fff; background: #316ac5; }
@@ -264,20 +266,20 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
 .home-view .featured-copy > p:last-child { max-width: 650px; margin: 0; color: #333; font: 12px/1.5 Tahoma, sans-serif; }
 .featured-actions { display: grid; gap: 7px; min-width: 112px; }
 
-.contact-view { display: block; padding: 24px; background: #f3f3ee; }
-.contact-form-window { min-height: 100%; border: 1px solid #7f9db9; background: #ece9d8; box-shadow: inset 0 0 0 1px #fff; }
-.contact-form-header { display: flex; align-items: center; gap: 12px; min-height: 68px; padding: 12px 16px; border-bottom: 1px solid #7f9db9; background: linear-gradient(90deg, #f7f9fe, #d7e6fb); }
+.contact-view { display: block; padding: 30px; background: #f3f3ee; }
+.contact-form-window { width: 100%; max-width: none; min-height: 100%; margin: 0; border: 1px solid #7f9db9; background: #ece9d8; box-shadow: inset 0 0 0 1px #fff; }
+.contact-form-header { display: flex; align-items: center; gap: 14px; min-height: 84px; padding: 14px 20px; border-bottom: 1px solid #7f9db9; background: linear-gradient(90deg, #f7f9fe, #d7e6fb); }
 .contact-form-header img { width: 36px; height: 36px; image-rendering: pixelated; }
 .contact-form-header h1 { margin: 0; color: #0a246a; font: 700 18px Tahoma, sans-serif; }
 .contact-form-header p { margin: 3px 0 0; color: #50698f; font-size: 11px; }
-.contact-form-layout { display: grid; grid-template-columns: minmax(0, 1fr) 220px; min-height: 440px; }
-.contact-form-layout form { padding: 22px; background: #fff; border-right: 1px solid #aca899; }
+.contact-form-layout { width: 100%; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) 275px; min-height: 440px; }
+.contact-form-layout form { min-width: 0; padding: 28px 27px 22px; background: #fff; border-right: 1px solid #aca899; }
 .contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.contact-field-row { display: grid; grid-template-columns: 105px minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 11px; }
+.contact-field-row { display: grid; grid-template-columns: 135px minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 14px; }
 .contact-field-row label { color: #222; font-size: 11px; }
 .contact-field-row input, .contact-field-row select, .contact-field-row textarea { width: 100%; min-width: 0; border: 1px solid #7f9db9; border-radius: 0; background: #fff; color: #111; box-shadow: inset 1px 1px 2px rgb(0 0 0 / .13); padding: 6px 7px; font: 12px Tahoma, Verdana, sans-serif; }
 .contact-field-row select { min-height: 29px; }
-.contact-field-row textarea { resize: vertical; line-height: 1.45; }
+.contact-field-row textarea { min-height: 170px; resize: vertical; line-height: 1.45; }
 .contact-field-row input:focus, .contact-field-row select:focus, .contact-field-row textarea:focus { outline: 1px solid #316ac5; outline-offset: 1px; border-color: #316ac5; }
 .field-error { grid-column: 2; margin-top: -6px; color: #b42318; font-size: 10px; }
 .message-field { align-items: start; }
@@ -289,7 +291,7 @@ button.file-row { cursor: default; }.file-row.selected { background: var(--blue-
 .contact-success-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 13px; border: 1px solid #246a19; border-radius: 50%; color: #fff; background: #3c9c2f; font-size: 24px; font-weight: 700; }
 .contact-success h2 { margin: 0 0 7px; color: #0a246a; font: 700 18px Tahoma, sans-serif; }
 .contact-success p { max-width: 390px; margin: 0 0 20px; color: #444; font-size: 12px; line-height: 1.55; }
-.contact-sidebar { padding: 15px; background: #ece9d8; }
+.contact-sidebar { padding: 18px; background: #ece9d8; }
 .contact-sidebar section { margin-bottom: 14px; border: 1px solid #7f9db9; background: #fff; }
 .contact-sidebar h2 { margin: 0; padding: 5px 8px; color: #fff; background: #316ac5; font: 700 11px Tahoma, sans-serif; }
 .contact-sidebar p { margin: 0; padding: 9px 8px; color: #333; font-size: 10px; line-height: 1.65; overflow-wrap: anywhere; }

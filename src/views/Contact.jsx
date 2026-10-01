@@ -76,18 +76,18 @@ export default function Contact() {
             </div>
             <div className="contact-field-row">
               <label htmlFor="contact-subject">Subject</label>
-              <input id="contact-subject" name="subject" defaultValue="Portfolio inquiry" required />
+              <input id="contact-subject" name="subject" defaultValue="Portfolio inquiry" autoComplete="off" required />
             </div>
             <div className="contact-field-row message-field">
               <label htmlFor="contact-message">Message</label>
-              <textarea id="contact-message" name="message" rows="7" required />
+              <textarea id="contact-message" name="message" rows="7" autoComplete="off" required />
               <ValidationError className="field-error" prefix="Message" field="message" errors={state.errors} />
             </div>
             <div className="contact-form-actions">
               <ValidationError className="form-error" errors={state.errors} />
               {cooldownError && <p className="form-error" role="alert">{cooldownError}</p>}
               <span>Sent securely through Formspree.</span>
-              <RetroButton type="submit" disabled={state.submitting}>{state.submitting ? 'Sending...' : 'Send message'}</RetroButton>
+              <RetroButton type="submit" disabled={state.submitting}>{state.submitting ? 'Sending…' : 'Send message'}</RetroButton>
             </div>
           </form>}
 
@@ -95,6 +95,7 @@ export default function Contact() {
             <section>
               <h2>Direct contact</h2>
               <p>{contactEmail}</p>
+              <span className="sr-only" aria-live="polite">{copied ? 'Email address copied to clipboard.' : ''}</span>
               <RetroButton type="button" onClick={copyEmail}>{copied ? 'Copied' : 'Copy email'}</RetroButton>
             </section>
             <section>
