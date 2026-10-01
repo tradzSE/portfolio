@@ -1,8 +1,12 @@
 import RetroButton from '../components/RetroButton'
 import { projects } from '../data'
 
-export default function Home({ navigate, setStatus }) {
-  const project = projects[0]
+export default function Home({ navigate, setStatus, onProjectSelect }) {
+  const openProject = (projectId) => {
+    onProjectSelect(projectId)
+    navigate('project')
+  }
+
   return (
     <div className="view home-view">
       <header className="home-header">
@@ -30,18 +34,22 @@ export default function Home({ navigate, setStatus }) {
       </section>
 
       <section className="featured-project">
-        <div className="section-label"><span>Featured project</span><span>Live, 2026</span></div>
-        <div className="featured-grid">
-          <img src="/icons/application.png" alt="" />
-          <div className="featured-copy">
-            <h3>{project.name}</h3>
-            <p className="file-type">Web application</p>
-            <p>{project.description}</p>
-          </div>
-          <div className="featured-actions">
-            <RetroButton onClick={() => navigate('project')}>View project</RetroButton>
-            <a className="retro-button" href={project.url} target="_blank" rel="noreferrer">Visit website</a>
-          </div>
+        <div className="section-label"><span>Featured projects</span><span>{projects.length} projects / 2026</span></div>
+        <div className="featured-list">
+          {projects.map((project) => (
+            <article className="featured-grid" key={project.id}>
+              <img src="/icons/application.png" alt="" />
+              <div className="featured-copy">
+                <h3>{project.name}</h3>
+                <p className="file-type">{project.type} / {project.status}</p>
+                <p>{project.description}</p>
+              </div>
+              <div className="featured-actions">
+                <RetroButton onClick={() => openProject(project.id)}>View project</RetroButton>
+                {project.url && <a className="retro-button" href={project.url} target="_blank" rel="noreferrer">Visit website</a>}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </div>

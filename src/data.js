@@ -37,6 +37,19 @@ export const projects = [
     features: ['Seed Inventory Management', 'Seed Packet Tracking', 'Barcode and QR Scanning', 'Rack and Tray Monitoring', 'Seed Request Processing', 'Inventory Transaction Tracking', 'Role-Based Access Control', 'Reports and Monitoring', 'AI Seed Assistant'],
     stack: ['React', 'Node.js', 'GraphQL', 'MySQL'],
   },
+  {
+    id: 'kwenta',
+    name: 'Kwenta',
+    type: 'Web Application',
+    year: '2026',
+    status: 'Live',
+    category: 'Education / Academic Tools',
+    subtitle: 'A mobile-first GWA calculator for Filipino university students.',
+    description: 'Kwenta helps Filipino students calculate their GWA using university-specific grading presets, academic-standing estimates, saved semesters, CSV export, and a flexible custom weighted-average calculator.',
+    features: ['University-Specific Grade Presets', 'GWA, GPA, and QPI Calculation', 'Academic Standing Estimates', 'Saved Semester History', 'CSV Export', 'Branded Result Sharing', 'Mobile-First Interface', 'Private On-Device Storage'],
+    stack: ['Next.js', 'React', 'TypeScript', 'Vitest', 'Vercel'],
+    url: 'https://kwenta.ranierteraldico.me/',
+  },
 ]
 
 export const skillGroups = [

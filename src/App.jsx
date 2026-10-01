@@ -53,6 +53,7 @@ export default function App() {
   const [notepadMaximized, setNotepadMaximized] = useState(false)
   const [easterEggOpen, setEasterEggOpen] = useState(false)
   const [easterEggCompleted, setEasterEggCompleted] = useState(() => sessionStorage.getItem('ranier-os-curiosity-achievement') === 'unlocked')
+  const [shutdownPhase, setShutdownPhase] = useState(null)
   const drag = useRef(null)
   const View = views[section] || Home
 
@@ -132,6 +133,12 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (shutdownPhase !== 'shutting-down') return undefined
+    const timer = window.setTimeout(() => setShutdownPhase('failed'), 2400)
+    return () => window.clearTimeout(timer)
+  }, [shutdownPhase])
+
   if (!booted) return <BootScreen onComplete={() => {
     localStorage.setItem('ranier-os-boot-complete-v1', 'true')
     setBooted(true)
@@ -177,7 +184,7 @@ export default function App() {
         </section>
       )}
 
-      {startOpen && <StartMenu onNavigate={navigate} onShutdown={() => { setStartOpen(false); setDialog('shutdown') }} />}
+      {startOpen && <StartMenu onNavigate={navigate} onShutdown={() => { setStartOpen(false); setShutdownPhase('confirm') }} />}
       <Taskbar
         startOpen={startOpen}
         onStart={() => setStartOpen((value) => !value)}
@@ -217,7 +224,27 @@ export default function App() {
         </div>
       </Dialog>}
 
-      {dialog === 'shutdown' && <Dialog title="Shut Down RANIER.OS" actionLabel="Return to Desktop" onClose={() => setDialog(null)}><p className="dialog-lead">It is now safe to close this tab.</p></Dialog>}
+      {shutdownPhase === 'confirm' && <Dialog title="Shut Down RANIER.OS" showActions={false} onClose={() => setShutdownPhase(null)}>
+        <div className="shutdown-confirmation">
+          <img src="/icons/ehres_EHTRAY.ICON.SHUTDOWN.ico" alt="" />
+          <div><p className="dialog-lead">Shut down RANIER.OS?</p><p>Any open programs will be closed before the system powers off.</p></div>
+        </div>
+        <div className="shutdown-confirm-actions">
+          <button type="button" className="retro-button" onClick={() => setShutdownPhase(null)}>Cancel</button>
+          <button type="button" className="retro-button" onClick={() => setShutdownPhase('shutting-down')}>Shut Down</button>
+        </div>
+      </Dialog>}
+      {(shutdownPhase === 'shutting-down' || shutdownPhase === 'failed') && <section className="shutdown-screen" aria-live="assertive">
+        {shutdownPhase === 'shutting-down' ? (
+          <div className="shutdown-progress"><img src="/icons/tab-image.ico" alt="" /><p>RANIER.OS is shutting down...</p><span>Closing network services</span><i aria-hidden="true" /></div>
+        ) : (
+          <section className="shutdown-error" role="alertdialog" aria-modal="true" aria-labelledby="shutdown-error-title">
+            <header id="shutdown-error-title">RANIER.OS - System Error</header>
+            <div><span aria-hidden="true">×</span><p><strong>Socket initialization failed.</strong><br />The network service did not respond.<br /><br />Shutdown has been cancelled.</p></div>
+            <footer><button type="button" className="retro-button" autoFocus onClick={() => { setShutdownPhase(null); setStatus('Shutdown cancelled: socket initialization failed') }}>Return to Desktop</button></footer>
+          </section>
+        )}
+      </section>}
       {dialog === 'about-os' && <Dialog title="About RANIER.OS" onClose={() => setDialog(null)}>
         <div className="about-os">
           <div className="about-os-product">
