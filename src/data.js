@@ -50,6 +50,19 @@ export const projects = [
     stack: ['Next.js', 'React', 'TypeScript', 'Vitest', 'Vercel'],
     url: 'https://kwenta.ranierteraldico.me/',
   },
+  {
+    id: 'resuma',
+    name: 'Resuma',
+    type: 'Web Application',
+    year: '2026',
+    status: 'Live',
+    category: 'Productivity / Career Tools',
+    subtitle: 'A focused resume builder with real-time document preview and direct export.',
+    description: 'Resuma is a privacy-friendly resume builder that lets users edit structured resume sections while seeing the finished document update in real time. It supports flexible formatting, reorderable entries, local draft storage, and direct PDF and DOCX export.',
+    features: ['Real-Time Resume Preview', 'PDF and DOCX Export', 'Multiple Resume Formats', 'Adjustable Typography and Title Colors', 'Drag-and-Drop Entry Reordering', 'Local Draft Storage', 'Responsive Builder Interface', 'No Account Required'],
+    stack: ['Next.js', 'React', 'TypeScript', 'GSAP', 'jsPDF', 'DOCX', 'Vercel'],
+    url: 'https://resuma.ranierteraldico.me/',
+  },
 ]
 
 export const skillGroups = [
