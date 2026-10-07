@@ -17,20 +17,35 @@ export default function Home({ navigate, setStatus, onProjectSelect }) {
         </div>
       </header>
 
-      <section className="profile-summary" aria-labelledby="welcome-heading">
-        <div className="profile-copy">
-          <h2 id="welcome-heading">Welcome to my portfolio</h2>
-          <p>I build practical software and web experiences from idea to deployment.</p>
-          <div className="button-row">
-            <RetroButton onMouseEnter={() => setStatus('Opening /projects...')} onClick={() => navigate('projects')}>View my work</RetroButton>
-            <RetroButton onMouseEnter={() => setStatus('Opening /about...')} onClick={() => navigate('about')}>About me</RetroButton>
+      <section className="recruiter-summary" aria-labelledby="recruiter-heading">
+        <div className="recruiter-copy">
+          <h2 id="recruiter-heading">Software engineer building practical web products and operational systems.</h2>
+          <p className="recruiter-intro">I'm Ranier Teraldico, a software engineer from Central Luzon State University based in Nueva Ecija, Philippines. I currently lead SEED-TRACK for the PhilRice Genebank and build independent products including Kwenta and Resuma.</p>
+          <div className="button-row recruiter-actions">
+            <RetroButton onMouseEnter={() => setStatus('Opening selected projects...')} onClick={() => navigate('projects')}>View selected work</RetroButton>
+            <RetroButton onMouseEnter={() => setStatus('Opening resume.pdf...')} onClick={() => navigate('resume')}>Open resume</RetroButton>
+            <RetroButton onMouseEnter={() => setStatus('Opening contact form...')} onClick={() => navigate('contact')}>Contact me</RetroButton>
           </div>
         </div>
-        <dl className="profile-details">
-          <div><dt>Role</dt><dd>Software Engineer</dd></div>
-          <div><dt>Focus</dt><dd>Software &amp; Web Development</dd></div>
-          <div><dt>Availability</dt><dd>Internship, Employment, Freelance</dd></div>
-        </dl>
+
+        <aside className="recruiter-panel" aria-label="Professional summary">
+          <header><span>PROFESSIONAL_PROFILE.INI</span><span>UPDATED 2026</span></header>
+          <dl>
+            <div><dt>Current work</dt><dd>Project Lead, SEED-TRACK</dd></div>
+            <div><dt>Organization</dt><dd>PhilRice Genebank</dd></div>
+            <div><dt>Core stack</dt><dd>React, Next.js, Node.js, GraphQL, MySQL</dd></div>
+            <div><dt>Availability</dt><dd>Open to full-time and freelance roles</dd></div>
+            <div><dt>Location</dt><dd>Nueva Ecija, Philippines</dd></div>
+          </dl>
+          <a href="https://www.linkedin.com/in/ranierteraldico/" target="_blank" rel="noreferrer">LinkedIn profile ↗</a>
+        </aside>
+      </section>
+
+      <section className="recruiter-proof" aria-label="Portfolio highlights">
+        <div><strong>{projects.length}</strong><span>documented projects</span></div>
+        <div><strong>{projects.filter((project) => project.status === 'Live').length}</strong><span>live web products</span></div>
+        <div><strong>1</strong><span>client system in development</span></div>
+        <div><strong>End to end</strong><span>planning through deployment</span></div>
       </section>
 
       <section className="featured-project">

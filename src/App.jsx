@@ -213,7 +213,7 @@ export default function App() {
         onSoundToggle={toggleSound}
       />
 
-      {welcomeOpen && <Dialog title="WELCOME TO RANIER.OS" className="welcome-dialog" actionLabel="START EXPLORING" onClose={() => setWelcomeOpen(false)}>
+      {welcomeOpen && <Dialog title="Please read carefully" className="welcome-dialog" actionLabel="START EXPLORING" onClose={() => setWelcomeOpen(false)}>
         <div className="welcome-document">
           <h2>WELCOME TO RANIER.OS</h2>
           <p className="welcome-rule">====================</p>
